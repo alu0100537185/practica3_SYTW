@@ -1,7 +1,6 @@
 source "https://rubygems.org"
 
-gem 'twitter'
-gem 'faraday'
+gem 'faraday', '0.8.7'
 gem 'thin'
 gem 'rake'
 gem 'haml'

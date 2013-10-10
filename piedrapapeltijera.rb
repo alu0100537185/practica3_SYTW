@@ -23,7 +23,7 @@ module RockPaperScissors
   
         computer_throw = @throws.sample
         player_throw = req.GET["choice"]
-        anwser = if !@throws.include?(player_throw)
+        answer = if !@throws.include?(player_throw)
             "Choose one of the following:"
           elsif player_throw == computer_throw
             "You tied with the computer"
@@ -32,20 +32,16 @@ module RockPaperScissors
           else
             "Ouch; #{computer_throw} beats #{player_throw}. Better luck next time!"
           end
-        
+
+	if !answer.empty?
+          answer.insert(0, "<b>Your choice:</b> #{player_throw}, \n<b>Computer choice:</b> #{computer_throw}, ")
+        end
         engine = Haml::Engine.new File.open("views/index.haml").read
         res = Rack::Response.new
         res.write engine.render({},
-       # <html>
-         # <title>rps</title>
-         # <body>
-           # <h1>
-               :anwser => answer,
+               :answer => answer,
                :choose => @choose,
                :throws => @throws)
-           # </h1>
-          #</body>
-        #</html>
         res.finish
       end # call
     end   # App
@@ -53,7 +49,6 @@ module RockPaperScissors
   
   if $0 == __FILE__
     require 'rack'
-    require 'rack/showexceptions'
     Rack::Server.start(
       :app => Rack::ShowExceptions.new(
                 Rack::Lint.new(

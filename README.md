@@ -12,8 +12,7 @@ La práctica está basada en la utilización de Haml para la creación de un tem
 Paso 1:
 
 Para ejecutar utilizamos: $ ruby piedrapapeltijera.rb
-
-Nota: el comando rake no me funciona (consultar a Casiano)
+                          $ rake
 
 Paso 2:
 
